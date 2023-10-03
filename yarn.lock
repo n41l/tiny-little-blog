@@ -3035,6 +3035,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tryghost/content-api@npm:^1.11.17":
+  version: 1.11.17
+  resolution: "@tryghost/content-api@npm:1.11.17"
+  dependencies:
+    axios: ^1.0.0
+  checksum: 780740b9e330f1b56cf752c13e7baef8b2586c58a965b7b6565a214c6c688ccdae6bf416ae5c1c176f4dde117a9d79db5df8b842b6c2dc2ad62fb7fd87302c37
+  languageName: node
+  linkType: hard
+
 "@trysound/sax@npm:0.2.0":
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
@@ -3793,6 +3802,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.0.0":
+  version: 1.5.1
+  resolution: "axios@npm:1.5.1"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 4444f06601f4ede154183767863d2b8e472b4a6bfc5253597ed6d21899887e1fd0ee2b3de792ac4f8459fe2e359d2aa07c216e45fd8b9e4e0688a6ebf48a5a8d
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^3.1.1":
   version: 3.2.1
   resolution: "axobject-query@npm:3.2.1"
@@ -4291,7 +4311,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"combined-stream@npm:^1.0.6":
+"combined-stream@npm:^1.0.6, combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
   dependencies:
@@ -5699,6 +5719,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.0":
+  version: 1.15.3
+  resolution: "follow-redirects@npm:1.15.3"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 584da22ec5420c837bd096559ebfb8fe69d82512d5585004e36a3b4a6ef6d5905780e0c74508c7b72f907d1fa2b7bd339e613859e9c304d0dc96af2027fd0231
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -5726,6 +5756,17 @@ __metadata:
     combined-stream: ^1.0.6
     mime-types: ^2.1.12
   checksum: 5134ada56cc246b293a1ac7678dba6830000603a3979cf83ff7b2f21f2e3725202237cfb89e32bcb38a1d35727efbd3c3a22e65b42321e8ade8eec01ce755d08
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "form-data@npm:4.0.0"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
   languageName: node
   linkType: hard
 
@@ -9462,6 +9503,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.0":
   version: 2.3.0
   resolution: "punycode@npm:2.3.0"
@@ -11047,6 +11095,7 @@ __metadata:
     "@svgr/webpack": ^8.0.1
     "@tailwindcss/forms": ^0.5.4
     "@tailwindcss/typography": ^0.5.9
+    "@tryghost/content-api": ^1.11.17
     "@types/mdx": ^2.0.5
     "@types/react": ^18.2.14
     "@typescript-eslint/eslint-plugin": ^6.1.0
