@@ -8,9 +8,10 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
-import { PostOrPage } from '@tryghost/content-api'
+import { PostOrPage, Tags } from '@tryghost/content-api'
 
 interface PaginationProps {
+  isNested?: boolean
   totalPages: number
   currentPage: number
 }
@@ -18,12 +19,14 @@ interface ListLayoutProps {
   posts: PostOrPage[]
   title: string
   initialDisplayPosts?: PostOrPage[]
+  tags: Tags,
   pagination?: PaginationProps
 }
 
-function Pagination({ totalPages, currentPage }: PaginationProps) {
+function Pagination({ isNested, totalPages, currentPage }: PaginationProps) {
   const pathname = usePathname()
   const basePath = pathname.split('/')[1]
+  const nestedPath = isNested ? pathname.substring(basePath.length + 1).split("/page/")[0] : '/'
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
@@ -37,7 +40,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
         {prevPage && (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={currentPage - 1 === 1 ? `/${basePath}${nestedPath}` : `/${basePath}${nestedPath}/page/${currentPage - 1}`}
             rel="prev"
           >
             Previous
@@ -52,7 +55,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
+          <Link href={`/${basePath}${nestedPath}/page/${currentPage + 1}`} rel="next">
             Next
           </Link>
         )}
@@ -65,13 +68,11 @@ export default function ListLayoutWithTags({
   posts,
   title,
   initialDisplayPosts = [],
+  tags,
   pagination,
 }: ListLayoutProps) {
   const pathname = usePathname()
-  const tagCounts = tagData as Record<string, number>
-  const tagKeys = Object.keys(tagCounts)
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
-
+  const sortedTags = tags.sort((a, b) => b.name!.localeCompare(a.name!))
   const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
 
   return (
@@ -98,18 +99,18 @@ export default function ListLayoutWithTags({
               <ul>
                 {sortedTags.map((t) => {
                   return (
-                    <li key={t} className="my-3">
-                      {pathname.split('/tags/')[1] === slug(t) ? (
+                    <li key={t.id} className="my-3">
+                      {pathname.split('/tags/')[1]?.split('/page/')[0] === slug(t.slug) ? (
                         <h3 className="inline py-2 px-3 uppercase text-sm font-bold text-primary-500">
-                          {`${t} (${tagCounts[t]})`}
+                          {`${t.name} (${t.count?.posts})`}
                         </h3>
                       ) : (
                         <Link
-                          href={`/tags/${slug(t)}`}
+                          href={`/tags/${slug(t.slug)}`}
                           className="py-2 px-3 uppercase text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500"
-                          aria-label={`View posts tagged ${t}`}
+                          aria-label={`View posts tagged ${t.name}`}
                         >
-                          {`${t} (${tagCounts[t]})`}
+                          {`${t.name} (${t.count?.posts})`}
                         </Link>
                       )}
                     </li>
@@ -159,7 +160,7 @@ export default function ListLayoutWithTags({
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+              <Pagination isNested={pagination.isNested} currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
             )}
           </div>
         </div>

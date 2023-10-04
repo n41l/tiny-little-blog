@@ -60,6 +60,11 @@ const securityHeaders = [
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
+    env: {
+      GHOST_URL: "http://127.0.0.1:2368", 
+      GHOST_KEY: "cd00f866b229bb942d8b8dfd50",
+      POST_PER_PAGE: 5,
+    },
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {

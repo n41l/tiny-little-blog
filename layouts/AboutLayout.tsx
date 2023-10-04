@@ -1,15 +1,31 @@
+// Copyright (c) 2023 ypg
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { ReactNode } from 'react'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-import { Author } from '@tryghost/content-api'
+import { Nullable } from '@tryghost/content-api'
+
+export interface SiteInfo {
+    title: string
+    description: string
+    founder: string
+    profile_image: Nullable<string> | undefined
+    location: Nullable<string> | undefined 
+    email: Nullable<string> | undefined 
+    twitter: Nullable<string> | undefined 
+    github: Nullable<string> | undefined 
+}
 
 interface Props {
   children: ReactNode
-  content: Author
+  content: SiteInfo
 }
 
-export default function AuthorLayout({ children, content }: Props) {
-  const { name, profile_image, location, twitter, website } = content
+export function AboutLayout({ children, content }: Props) {
+  const { founder, profile_image, location, twitter, email, github} = content
 
   return (
     <>
@@ -30,9 +46,11 @@ export default function AuthorLayout({ children, content }: Props) {
                 className="h-48 w-48 rounded-full object-contain"
               />
             )}
-            <h3 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h3>
+            <h3 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{founder}</h3>
             <div className="text-gray-500 dark:text-gray-400">{location}</div>
             <div className="flex space-x-3 pt-6">
+              {email && <SocialIcon kind="mail" href={email} />}
+              {github && <SocialIcon kind="github" href={github} />}
               {twitter && <SocialIcon kind="twitter" href={twitter} />}
             </div>
           </div>

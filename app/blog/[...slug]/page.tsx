@@ -2,24 +2,12 @@ import 'css/prism.css'
 import 'katex/dist/katex.css'
 
 import PageTitle from '@/components/PageTitle'
-import { components } from '@/components/MDXComponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { getPostBySlug, getPosts } from '@/data/contentAPI'
-// import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
-// import { allBlogs, allAuthors } from 'contentlayer/generated'
-// import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
-
-const defaultLayout = 'PostLayout'
-const layouts = {
-  PostSimple,
-  PostLayout,
-  PostBanner,
-}
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -80,8 +68,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // Filter out drafts in production
   const sortedCoreContents = await getPosts();
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
-  console.log("123123123123")
-  console.log(postIndex)
   if (postIndex === -1) {
     return (
       <div className="mt-24 text-center">

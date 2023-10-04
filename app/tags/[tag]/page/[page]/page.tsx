@@ -27,10 +27,10 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function TagPage({ params }: { params: { tag: string } }) {
+export default async function TagPage({ params }: { params: { tag: string, page: number} }) {
   const tag = decodeURI(params.tag)
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
-  const pageNumber = 1
+  const pageNumber = params.page
   const pageSize = parseInt(process.env.POSTS_PER_PAGE || "5")
   const posts = await getPostsByTag(tag, pageNumber, pageSize)
   const tags = await getTags()
