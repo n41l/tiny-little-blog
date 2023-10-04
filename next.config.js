@@ -62,7 +62,8 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     env: {
       GHOST_URL: "http://127.0.0.1:2368", 
-      GHOST_KEY: "cd00f866b229bb942d8b8dfd50",
+      GHOST_CONTENT_KEY: "cd00f866b229bb942d8b8dfd50",
+      GHOST_ADMIN_KEY: "651c10122a63c500e9cf7670:8f11a0034c2f107a50b984dfb16b2e1bef7d3cfe809fdb2a33c3e24f6af35c8f",
       POST_PER_PAGE: 5,
     },
     reactStrictMode: true,

@@ -2,7 +2,7 @@ import GhostContentAPI from '@tryghost/content-api';
 
 const contentAPI = new GhostContentAPI({
   url: process.env.GHOST_URL as string,
-  key: process.env.GHOST_KEY as string,
+  key: process.env.GHOST_CONTENT_KEY as string,
   version: "v5.0"
 });
 
